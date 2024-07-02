@@ -1,5 +1,9 @@
-
-
 export default {
-  // config options
+    // config options
+    base: './',
+    build: {
+
+        outDir: './../docs',
+        assetsDir: '',
+    }
 }
