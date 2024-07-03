@@ -19,12 +19,35 @@ const listButtons = [
     'gray',
 ];
 
+function rand_int(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function randomRedChannel() {
+    return rand_int(0, 255) % 2 ? rand_int(0, 20) : rand_int(0, 255);
+}
+
+function randomGreenChannel() {
+    return rand_int(0, 255) > 200 ? rand_int(0, 255) : rand_int(50, 165);
+}
+
+function randomBlueChannel() {
+    return rand_int(0, 255) - rand_int(0, 255) % 2;
+}
+
 function generate_random_color() {
-    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+    if (rand_int(0, 255) > 240) {
+        const color = rand_int(0, 240);
+        return {
+            r: color + rand_int(0, 15),
+            g: color + rand_int(0, 15),
+            b: color + rand_int(0, 15),
+        }
+    }
     return {
-        r: parseInt(randomColor.slice(0, 2), 16),
-        g: parseInt(randomColor.slice(2, 4), 16),
-        b: parseInt(randomColor.slice(4, 6), 16),
+        r: randomRedChannel(),
+        g: randomGreenChannel(),
+        b: randomBlueChannel(),
     }
 }
 
