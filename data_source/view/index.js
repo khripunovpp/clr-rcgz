@@ -1,5 +1,6 @@
 import {collection, getDocs, getFirestore} from "firebase/firestore";
 import {app} from "./../js/db.js";
+import data from "./../js/data.json";
 
 const colorsRef = document.getElementById('colors')
 colorsRef.style.display = 'flex'
@@ -20,4 +21,16 @@ async function get_all_colors_from_db() {
     });
 }
 
-get_all_colors_from_db()
+async function get_all_colors_from_local() {
+    data.data.forEach((d) => {
+        const color = document.createElement('div')
+        color.style.backgroundColor = `rgb(${d.r}, ${d.g}, ${d.b})`
+        color.style.width = '50px'
+        color.style.height = '50px'
+        // name
+        color.textContent = d.name
+        colorsRef.appendChild(color)
+    });
+}
+
+get_all_colors_from_local()
