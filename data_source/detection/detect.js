@@ -18,8 +18,10 @@ let training = false
 let loading = false
 
 const isLocalhost = window.location.hostname === 'localhost';
-if (!isLocalhost) {
-    trainBtn.disabled = true
+if (isLocalhost) {
+
+} else {
+    onLoad()
 }
 
 colorPicker.addEventListener('change', (e) => {
@@ -31,16 +33,22 @@ trainBtn.addEventListener('click', (e) => {
     loadBtn.disabled = true
     trainBtn.disabled = true
     train()
-
 });
 
 loadBtn.addEventListener('click', (e) => {
-    loading = true
-    trainBtn.disabled = true
-    load()
+    onLoad()
 });
 
-let activeColor = '#000000'
+function onLoad() {
+    loading = true
+    loadBtn.disabled = true
+    trainBtn.disabled = true
+    load()
+}
+
+let activeColor = '#451345'
+colorPicker.value = activeColor
+document.body.style.backgroundColor = activeColor;
 
 function detectColor() {
     activeColor = colorPicker.value
