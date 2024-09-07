@@ -29,7 +29,9 @@ colorPicker.addEventListener('change', (e) => {
 trainBtn.addEventListener('click', (e) => {
     training = true
     loadBtn.disabled = true
+    trainBtn.disabled = true
     train()
+
 });
 
 loadBtn.addEventListener('click', (e) => {
@@ -141,13 +143,15 @@ function train() {
         console.log('Model trained')
     }).then((saveResults) => {
         return model.save('localstorage://color-model').then(() => {
+            return model.save('downloads://color-model')
+        }).then(() => {
             console.log('Model saved')
         });
     });
 }
 
 function load() {
-    const url = isLocalhost ? 'localstorage://color-model' : 'https://color-recognizer-ce9cd.web.app/color-model.json'
+    const url = isLocalhost ? 'localstorage://color-model' : 'https://khripunovpp.github.io/clr-rcgz/color-model.json'
     return Promise.resolve().then(() => {
         return tf.loadLayersModel(url);
     }).then((m) => {

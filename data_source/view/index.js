@@ -118,4 +118,4 @@ function render_colors(
 const resultColors = filter_colors()
 console.log({resultColors})
 group_by_color(resultColors)
-await get_all_colors_from_local()
+Promise.resolve().then(() => get_all_colors_from_local())
